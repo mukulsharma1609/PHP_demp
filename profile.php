@@ -37,7 +37,7 @@ $user_info = $obj->getCurrentUserInfo();
 
 
 
-        <p>Edit your user settings:</p>
+        <p>User Profile:</p>
 
         <p class="setting"><span>E-mail Address </span><?php echo $user_info['email']; ?> </p>
 
@@ -49,8 +49,8 @@ $user_info = $obj->getCurrentUserInfo();
 
 
 
-    </div><!-- @end #content -->
-  </div><!-- @end #w -->
+    </div>
+  </div>
 
 </body>
 </html>
