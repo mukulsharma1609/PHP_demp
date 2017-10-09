@@ -9,15 +9,17 @@ $obj_register = new User();
 
 if (isset($_POST['register'])) {
 
-	$name = $_POST['name'];
-	$email = $_POST['email'];
-	$password = $_POST['password'];
-	$confirm_password = $_POST['confirm_password'];
-	$mobile = $_POST['mobile'];
-	$dob = $_POST['dob'];
-	$adress = $_POST['adress'];
+	$name = $obj_register->CheckInput($_POST['name']);
+	$email = $obj_register->CheckInput($_POST['email']);
+	$password = $obj_register->CheckInput($_POST['password']);
+	$confirm_password = $obj_register->CheckInput($_POST['confirm_password']);
+	$mobile = $obj_register->CheckInput($_POST['mobile']);
+	$dob = $obj_register->CheckInput($_POST['dob']);
+	$adress = $obj_register->CheckInput($_POST['adress']);
 
-	if ($confirm_password != $password) {
+	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+		echo "<script>alert('Enter Valid Email Adress')</script>";
+	} elseif ($confirm_password != $password) {
 		echo "<script>alert('Password Not Matched')</script>";
 	} else {
 		if ($obj_register->isUserExist($name, $email, $password)) {
@@ -25,6 +27,7 @@ if (isset($_POST['register'])) {
 		} else {
 			$user = $obj_register->UserRegister($name, $email, $password, $mobile, $dob, $adress);
 			if ($user) {
+				header("location: index.php");
 				echo "success";
 			} else {
 				echo "error register";
@@ -109,9 +112,9 @@ button {
     <label><b>Repeat Password</b></label>
     <input type="password" placeholder="Repeat Password" name="confirm_password" required>
     <label><b>Mobile</b></label>
-    <input type="text" placeholder="Enter 10 Digit Mobile no" name="mobile" required>
+    <input type="text" placeholder="Enter 10 Digit Mobile no" name="mobile" required pattern="[789][0-9]{9}">
     <label><b>DOB</b></label>
-    <input type="date" placeholder="Enter DOB" name="dob" required>
+    <input type="date" placeholder="Enter DOB" name="dob" required min="1950-01-01" max="2005-12-30">
     <label><b>Adress</b></label>
     <input type="text" placeholder="Enter Full Adress" name="adress" required>
 

@@ -9,16 +9,16 @@ class User extends Database {
 
 		$result = pg_query($this->con, $sql);
 		if (pg_num_rows($result) > 0) {
-			while ($row = pg_fetch_assoc($result)) {
-				if ($row['password'] == $password) {
-					$_SESSION['user'] = $email;
+			$row = pg_fetch_assoc($result);
+			if ($row['password'] == $password) {
+				$_SESSION['user'] = $email;
 
-					echo $_SESSION['user'];
-					return true;
-				} else {
-					return false;
-				}
+				echo $_SESSION['user'];
+				return true;
+			} else {
+				return false;
 			}
+
 		} else {
 			return false;
 		}
@@ -56,6 +56,14 @@ class User extends Database {
 		$result = pg_fetch_assoc($sql);
 		return $result;
 	}
+
+	public function CheckInput($data) {
+		$data = trim($data);
+		$data = stripslashes($data);
+		$data = htmlspecialchars($data);
+		return $data;
+	}
+
 }
 
 ?>
