@@ -1,5 +1,5 @@
 <?php
-require 'classes/Functions.php';
+require 'classes/User.php';
 if (session_destroy()) // Destroying All Sessions
 {
 	unset($_SESSION['user']);
