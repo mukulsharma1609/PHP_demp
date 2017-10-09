@@ -1,6 +1,6 @@
 <?php
 
-include 'classes/Functions.php';
+include 'classes/User.php';
 if (isset($_SESSION['user'])) {
 	header("location: profile.php");
 }

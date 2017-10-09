@@ -4,7 +4,7 @@
 if (isset($_SESSION['user'])) {
 	header("location: profile.php");
 }
-require 'classes/Functions.php';
+require 'classes/User.php';
 $obj_register = new User();
 
 if (isset($_POST['register'])) {
